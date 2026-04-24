@@ -10,7 +10,7 @@ struct  Date
     int day;
 };
 
-Date parseDate(string stringDate) { // YYYY-MM-DD
+Date parseDate(string stringDate) {
     int y = stoi(stringDate.substr(0, 4));
     int m = stoi(stringDate.substr(5, 2));
     int d = stoi(stringDate.substr(8, 2));
@@ -18,13 +18,13 @@ Date parseDate(string stringDate) { // YYYY-MM-DD
     return {y, m, d};
 }
 
-bool isDateOlder(const Date& dateA, const Date& dateB) { // dateA < dateB
+bool isDateOlder(const Date& dateA, const Date& dateB) {
     return (dateA.year != dateB.year) ? (dateA.year < dateB.year) :
            (dateA.month != dateB.month) ? (dateA.month < dateB.month) :
            (dateA.day < dateB.day);
 }
 
-bool isDateInRange(const Date& date, const Date& start, const Date& end) { // start <= date < end
+bool isDateInRange(const Date& date, const Date& start, const Date& end) {
     return !isDateOlder(date, start) && isDateOlder(date, end);
 }
 
