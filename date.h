@@ -9,6 +9,11 @@ struct Date {
     int day;
 };
 
+struct  DateRange {
+    Date start;
+    Date end;
+};
+
 Date parseDate(const string& stringDate);
 bool isDateOlder(const Date& dateA, const Date& dateB);
 bool isDateInRange(const Date& date, const Date& start, const Date& end);
