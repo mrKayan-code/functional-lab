@@ -28,6 +28,12 @@ bool isDateInRange(const Date& date, const Date& start, const Date& end) {
     return !isDateOlder(date, start) && isDateOlder(date, end);
 }
 
+string dateToSring(const Date& date) {
+    string monthString = (date.month < 10) ? ("0" + std::to_string(date.month)) : std::to_string(date.month);
+    string dayString = (date.day < 10) ? ("0" + std::to_string(date.day)) : std::to_string(date.day);
+    return std::to_string(date.year) + "-" + monthString + "-" + dayString;
+}
+
 struct Order {
     int id;
     int amount;
