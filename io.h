@@ -1,10 +1,12 @@
 #pragma once
 #include "date.h"
 #include "order.h"
+#include "category_list.h"
 #include <string>
 
 using namespace std;
 
 DateRange readDateRange();
-// string* readCategories();
+CategoryList readCategories();
 
+void printCategories(const CategoryList& categories);

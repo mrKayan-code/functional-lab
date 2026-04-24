@@ -7,7 +7,11 @@ Date parseDate(const string& stringDate) {
     int m = stoi(stringDate.substr(5, 2));
     int d = stoi(stringDate.substr(8, 2));
     
-    return {y, m, d};
+    return {
+        y,
+        m, 
+        d
+    };
 }
 
 bool isDateOlder(const Date& dateA, const Date& dateB) {
