@@ -18,12 +18,15 @@ Date parseDate(string stringDate) { // YYYY-MM-DD
     return {y, m, d};
 }
 
-bool isDateOlder(const Date& dateA, const Date& dateB) {
+bool isDateOlder(const Date& dateA, const Date& dateB) { // dateA < dateB
     return (dateA.year != dateB.year) ? (dateA.year < dateB.year) :
            (dateA.month != dateB.month) ? (dateA.month < dateB.month) :
            (dateA.day < dateB.day);
 }
 
+bool isDateInRange(const Date& date, const Date& start, const Date& end) { // start <= date < end
+    return !isDateOlder(date, start) && isDateOlder(date, end);
+}
 
 struct Order {
     int id;
