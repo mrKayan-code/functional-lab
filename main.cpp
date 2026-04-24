@@ -5,9 +5,9 @@ using namespace std;
 
 struct  Date
 {
-    int y;
-    int m;
-    int d;
+    int year;
+    int month;
+    int day;
 };
 
 Date parseDate(string stringDate) { // YYYY-MM-DD
@@ -17,6 +17,13 @@ Date parseDate(string stringDate) { // YYYY-MM-DD
     
     return {y, m, d};
 }
+
+bool isDateOlder(const Date& dateA, const Date& dateB) {
+    return (dateA.year != dateB.year) ? (dateA.year < dateB.year) :
+           (dateA.month != dateB.month) ? (dateA.month < dateB.month) :
+           (dateA.day < dateB.day);
+}
+
 
 struct Order {
     int id;
