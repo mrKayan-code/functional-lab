@@ -26,9 +26,9 @@ inline List<T> cons(T data, List<T> rest) {
 }
 
 template<typename T, typename F>
-inline void stream(List<T> list, F action) {
+inline void stream(List<T> list, F f) {
     return list.head == nullptr ? void() :
-           (action(list.head->data),
-            stream(List<T>{list.head->next, list.length - 1}, action));
+           (f(list.head->data),
+            stream(List<T>{list.head->next, list.length - 1}, f));
 }
 
