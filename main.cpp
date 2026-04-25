@@ -8,9 +8,7 @@
 using namespace std;
 
 int main() {
-    List<Order> ol = readOrderList();
     
-    printOrderList(ol);
 
     return 0;
 }

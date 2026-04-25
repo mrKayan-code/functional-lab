@@ -1,4 +1,5 @@
 #pragma once
+#include <type_traits>
 
 using namespace std;
 
@@ -52,3 +53,11 @@ inline Accumulator fold(List<T> list, Accumulator first, F f) {
                 f
             );
 }
+
+template<typename T, typename F, typename U = invoke_result_t<F, T>>
+inline List<U> map(List<T> list, F f) {
+    return list.head == nullptr ?
+            emptyList<U>() 
+            : cons(f(list.head->data), map(List<T>{list.head->next, list.length - 1}, f));
+}
+
