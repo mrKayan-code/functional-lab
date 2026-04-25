@@ -41,3 +41,14 @@ inline List<T> filter(List<T> list, Predicate predicate) {
                 cons(list.head->data, filter(List<T>{list.head->next, list.length - 1}, predicate)) 
                 : filter(List<T>{list.head->next, list.length - 1}, predicate));
 }
+
+template<typename T, typename Accumulator, typename F>
+inline Accumulator fold(List<T> list, Accumulator first, F f) {
+    return list.head == nullptr ? 
+            first
+            : fold(
+                List<T>{list.head->next, list.length - 1},
+                f(first, list.head->data),
+                f
+            );
+}
