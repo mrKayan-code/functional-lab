@@ -47,10 +47,13 @@ List<string> readCategoryList() {
 
 void printCategoryList(const List<string>& categoryList) {
     bool isFirst = true;
-    stream(categoryList, [&isFirst](const string& name) {
-        cout << (isFirst ? "" : ", ") << name;
-        isFirst = false;
-    });
+    printList(
+        categoryList,
+        [&isFirst](const string& name) {
+            cout << (isFirst ? "" : ", ") << name;
+            isFirst = false;
+        }
+    );
 }
 
 Order readOrder() {
@@ -84,8 +87,20 @@ List<Order> readOrderList() {
 }
 
 void printOrderList(const List<Order>& orderList) {
-    stream(orderList, [](const Order& o){
-        cout << o.id << ", " << o.amount << ", " << o.category 
+    printList(
+        orderList,
+        [] (const Order& o) {
+            cout << o.id << ", " << o.amount << ", " << o.category 
              << ", " << dateToString(o.date) << endl;
-    });
+        }
+    );
+}
+
+void printCategoryStatsList(const List<CategoryStat>& categoryStatsList) {
+    printList(
+        categoryStatsList,
+        [] (const CategoryStat& categoryStat) {
+            cout << categoryStat.name << ": " << categoryStat.averageAmount << endl;
+        }
+    );
 }
