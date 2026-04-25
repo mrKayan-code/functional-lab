@@ -44,12 +44,12 @@ inline List<T> filter(List<T> list, Predicate predicate) {
 }
 
 template<typename T, typename Accumulator, typename F>
-inline Accumulator fold(List<T> list, Accumulator first, F f) {
+inline Accumulator fold(List<T> list, Accumulator left, F f) {
     return list.head == nullptr ? 
-            first
+            left
             : fold(
                 List<T>{list.head->next, list.length - 1},
-                f(first, list.head->data),
+                f(left, list.head->data),
                 f
             );
 }
@@ -61,3 +61,14 @@ inline List<U> map(List<T> list, F f) {
             : cons(f(list.head->data), map(List<T>{list.head->next, list.length - 1}, f));
 }
 
+template<typename T>
+inline bool contains(List<T> list, const T& element) {
+    return list.head == nullptr ?
+            false
+            : list.head->data == element ?
+                true
+                : contains(
+                    List<T>{list.head->next, list.length - 1},
+                    element
+                );
+}
