@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include <optional>
 
 using namespace std;
 
@@ -54,6 +55,17 @@ inline Accumulator fold(List<T> list, Accumulator left, F f) {
             );
 }
 
+template<typename T, typename F>
+inline optional<T> reduce(List<T> list, F f) {
+    return list.head == nullptr ?
+            nullopt
+            : optional<T>{ fold(
+                List<T>{list.head->next, list.length - 1},
+                list.head->data,
+                f
+            )};
+}
+
 template<typename T, typename F, typename U = invoke_result_t<F, T>>
 inline List<U> map(List<T> list, F f) {
     return list.head == nullptr ?
@@ -72,3 +84,25 @@ inline bool contains(List<T> list, const T& element) {
                     element
                 );
 }
+
+
+
+// template<typename T, typename Comparator>
+// inline optional<T> findMax(List<T> list, Comparator comparator) {
+//     return list.head == nullptr ?
+//             nullopt
+//             : [
+//                 current = list.head->data, 
+//                 rest = List<T>{list.head->next, list.length - 1}
+//             ] () {
+//                 optional<T> maxOfRest = findMax(
+//                     rest,
+//                     comparator
+//                 );
+//                 return maxOfRest.has_value() ?
+//                         (comparator(*maxOfRest, current) ? 
+//                             *maxOfRest
+//                             : current)
+//                         : current;
+//             }
+// }

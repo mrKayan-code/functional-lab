@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <optional>
 #include "date.h"
 #include "order.h"
 #include "io.h"
@@ -50,18 +51,22 @@ int main() {
 
     cout << totalAmount << endl;
 
-    int maxAmount = fold(
+    optional<Order> maxAmountOrder = reduce(
         filtered,
-        filtered.length > 0 ? 
-            filtered.head->data.amount
-            : 0,
-        [](int left, const Order& right) {
-            return left > right.amount ?
+        [] (const Order& left, const Order& right) {
+            return left.amount > right.amount ?
                     left
-                    : right.amount;
+                    : right;
         }
     );
 
-    cout << maxAmount << endl;
+    string maxAmountResult = maxAmountOrder.has_value() ?
+            to_string(maxAmountOrder.value().amount)
+            : "no data";
+    
+    cout << maxAmountResult << endl;
+    
+
+
     return 0;
 }
