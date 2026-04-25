@@ -1,18 +1,16 @@
 #pragma once
 #include "date.h"
 #include "order.h"
-#include "category_list.h"
-#include "order_list.h"
+#include "functional_list.h"
+#include <string>
 
 
 using namespace std;
 
 DateRange readDateRange();
 
-CategoryList readCategoryList();
-void printCategoryList(const CategoryList& categoryList);
+List<string> readCategoryList();
+List<Order> readOrderList();
 
-Order readOrder();
-OrderList readOrderList();
-void printOrder(const Order& order);
-void printOrderList(const OrderList& orderList);
+void printCategoryList(const List<string>& categoryList);
+void printOrderList(const List<Order>& orderList);

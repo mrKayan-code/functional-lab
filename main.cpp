@@ -2,14 +2,13 @@
 #include <string>
 #include "date.h"
 #include "order.h"
-#include "category_list.h"
-#include "order_list.h"
 #include "io.h"
+#include "functional_list.h"
 
 using namespace std;
 
 int main() {
-    OrderList ol = readOrderList();
+    List<Order> ol = readOrderList();
     
     printOrderList(ol);
 

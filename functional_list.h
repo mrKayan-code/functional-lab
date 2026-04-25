@@ -28,16 +28,16 @@ inline List<T> cons(T data, List<T> rest) {
 template<typename T, typename F>
 inline void stream(List<T> list, F f) {
     return list.head == nullptr ? 
-            void() :
-            (f(list.head->data),
+            void() 
+            : (f(list.head->data),
              stream(List<T>{list.head->next, list.length - 1}, f));
 }
 
 template<typename T, typename Predicate>
 inline List<T> filter(List<T> list, Predicate predicate) {
     return list.head == nullptr ? 
-            emptyList<T>() :
-            (predicate(list.head->data) ? 
-                cons(list.head->data, filter(List<T>{list.head->next, list.length - 1}, predicate)) :
-                filter(List<T>{list.head->next, list.length - 1}, predicate) )
+            emptyList<T>() 
+            : (predicate(list.head->data) ? 
+                cons(list.head->data, filter(List<T>{list.head->next, list.length - 1}, predicate)) 
+                : filter(List<T>{list.head->next, list.length - 1}, predicate));
 }

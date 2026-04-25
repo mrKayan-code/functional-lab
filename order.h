@@ -5,6 +5,6 @@
 struct Order {
     int id;
     int amount;
-    std::string category;
+    string category;
     Date date;
 };
