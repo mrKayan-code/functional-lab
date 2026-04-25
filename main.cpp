@@ -9,53 +9,46 @@
 
 using namespace std;
 
-List<Order> filterOrdersByDatePositiveAmountCategories(const List<Order>& orders, const DateRange& dateRange, const List<string>& categories) {
-    // List<Order> filtered = filter(
-    //     orders,
-    //     [&dateRange](const Order& order) {
-    //         return isDateInRange(
-    //             order.date,
-    //             dateRange.start,
-    //             dateRange.end
-    //         );
-    //     }
-    // );
-
-    // filtered = filter(
-    //     filtered,
-    //     [](const Order& order) {
-    //         return order.amount > 0;
-    //     }
-    // );
-
-    // filtered = filter(
-    //     filtered,
-    //     [&categories](const Order& order) {
-    //         return contains(categories, order.category);
-    //     }
-    // );
-
-    // return filtered;
-
+List<Order> filterOrdersByDate(const List<Order>& orders, const DateRange& dateRange) {
     return filter(
-        filter(
-            filter(
-                orders,
-                [&dateRange](const Order& order) {
-                    return isDateInRange(
-                        order.date,
-                        dateRange.start,
-                        dateRange.end
-                    );
-                }
-            ),
-            [](const Order& order) {
-                return order.amount > 0;
-            }
-        ),
+        orders,
+        [&dateRange](const Order& order) {
+            return isDateInRange(
+                order.date,
+                dateRange.start,
+                dateRange.end
+            );
+        }
+    );
+}
+
+List<Order> filterOrdersByPositiveAmount(const List<Order>& orders) {
+    return filter(
+        orders,
+        [](const Order& order) {
+            return order.amount > 0;
+        }
+    );
+}
+
+List<Order> filterOrdersByCategories(const List<Order>& orders, const List<string>& categories) {
+    return filter(
+        orders,
         [&categories](const Order& order) {
             return contains(categories, order.category);
         }
+    );
+}
+
+List<Order> filterOrdersByDatePositiveAmountCategories(const List<Order>& orders, const DateRange& dateRange, const List<string>& categories) {
+    return filterOrdersByCategories(
+        filterOrdersByPositiveAmount(
+            filterOrdersByDate(
+                orders,
+                dateRange
+            )
+        ),
+        categories
     );
 }
 
