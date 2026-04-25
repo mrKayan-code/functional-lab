@@ -66,6 +66,31 @@ int main() {
     
     cout << maxAmountResult << endl;
     
+    stream(
+        categories,
+        [&filtered] (const string& category) {
+            List<Order> ordersByCategory = filter(
+                filtered,
+                [&category] (const Order& order) {
+                    return order.category == category;
+                }
+            );
+
+            int sum = fold(
+                ordersByCategory,
+                0,
+                [](int left, const Order& order) {
+                    return left + order.amount;
+                }
+            );
+
+            double average = ordersByCategory.length > 0 ?
+                    double(sum) / ordersByCategory.length
+                    : 0.0;
+            
+            cout << category << ": " << average << endl;
+        }
+    );
 
 
     return 0;
