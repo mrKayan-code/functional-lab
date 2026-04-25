@@ -9,9 +9,9 @@
 using namespace std;
 
 int main() {
-    CategoryList cl = readCategories();
+    OrderList ol = readOrderList();
     
-    printCategories(cl);
+    printOrderList(ol);
 
     return 0;
 }

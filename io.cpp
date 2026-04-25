@@ -50,19 +50,62 @@ CategoryList parseCategories(const string& line, size_t start) {
 }
 
 
-CategoryList readCategories() {
+CategoryList readCategoryList() {
     string line;
     getline(cin >> ws, line);
     return parseCategories(line, 0);
 }
 
-void printCategoriesRecursive(const CategoryNode* current) {
+void printCategoriesRecursively(const CategoryNode* current) {
     cout << current->name << (current->next != nullptr ? ", " : "");
-    return current->next != nullptr ? printCategoriesRecursive(current->next) : 
+    return current->next != nullptr ? printCategoriesRecursively(current->next) : 
            void();
 }
 
-void printCategories(const CategoryList& categories) {
-    return categories.head != nullptr ? printCategoriesRecursive(categories.head) :
+void printCategoryList(const CategoryList& categoryList) {
+    return categoryList.head != nullptr ? printCategoriesRecursively(categoryList.head) :
+           void();
+}
+
+
+Order readOrder() {
+    int id, amount; 
+    char sep; 
+    string category, dateStr;
+    
+    cin >> id >> sep >> amount >> sep >> category >> dateStr;
+
+    return Order {
+        id, 
+        amount, 
+        category.substr(0, category.length() - 1), 
+        parseDate(dateStr)
+    };
+}
+
+OrderList buildOrderList(Order order, OrderList rest) {
+    return OrderList{new OrderNode{order, rest.head}, rest.count + 1};
+}
+
+OrderList readOrderList() {
+    return (cin >> ws).eof() ? OrderList {nullptr, 0} : 
+           [order = readOrder()]() -> OrderList {
+            OrderList rest = readOrderList();
+            return buildOrderList(order, rest);
+           } ();
+}
+
+void printOrder(const Order& order) {
+    cout << order.id << ", " << order.amount << ", " << order.category << ", " << dateToString(order.date) << endl;
+}
+
+void printOrdersReccursively(const OrderNode* current) {
+    printOrder(current->order);
+    return current->next != nullptr ? printOrdersReccursively(current->next) : 
+           void();
+}
+
+void printOrderList(const OrderList& orderList) {
+    return orderList.head != nullptr ? printOrdersReccursively(orderList.head) :
            void();
 }

@@ -2,7 +2,7 @@
 #include "order.h"
 
 struct OrderNode {
-    Order data;
+    Order order;
     OrderNode* next;
 };
 

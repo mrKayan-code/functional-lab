@@ -8,7 +8,11 @@
 using namespace std;
 
 DateRange readDateRange();
-CategoryList readCategories();
-OrderList readOrders();
 
-void printCategories(const CategoryList& categories);
+CategoryList readCategoryList();
+void printCategoryList(const CategoryList& categoryList);
+
+Order readOrder();
+OrderList readOrderList();
+void printOrder(const Order& order);
+void printOrderList(const OrderList& orderList);
