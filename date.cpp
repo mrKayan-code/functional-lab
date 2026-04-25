@@ -15,9 +15,11 @@ Date parseDate(const string& stringDate) {
 }
 
 bool isDateOlder(const Date& dateA, const Date& dateB) {
-    return (dateA.year != dateB.year) ? (dateA.year < dateB.year) :
-           (dateA.month != dateB.month) ? (dateA.month < dateB.month) :
-           (dateA.day < dateB.day);
+    return (dateA.year != dateB.year) ? 
+            (dateA.year < dateB.year) :
+            (dateA.month != dateB.month) ?
+                (dateA.month < dateB.month) :
+                (dateA.day < dateB.day);
 }
 
 bool isDateInRange(const Date& date, const Date& start, const Date& end) {
@@ -25,7 +27,13 @@ bool isDateInRange(const Date& date, const Date& start, const Date& end) {
 }
 
 string dateToString(const Date& date) {
-    string monthString = (date.month < 10) ? ("0" + to_string(date.month)) : to_string(date.month);
-    string dayString = (date.day < 10) ? ("0" + to_string(date.day)) : to_string(date.day);
+    string monthString = (date.month < 10) ? 
+                            ("0" + to_string(date.month)) : 
+                            to_string(date.month);
+
+    string dayString = (date.day < 10) ? 
+                        ("0" + to_string(date.day)) : 
+                        to_string(date.day);
+    
     return to_string(date.year) + "-" + monthString + "-" + dayString;
 }
